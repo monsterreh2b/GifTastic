@@ -16,6 +16,8 @@ var topics = ["Michael Jordan", "Magic Johnson", "Larry Bird", "Karl Malone"];
           var a= $("<button>");
           a.addClass("topic");
           a.attr("data-name", topics[i]);
+          a.attr("data-state","still");
+          console.log(a.attr("data-state"));
           a.text(topics[i]);
           $("#topics-view").append(a);
           
@@ -26,8 +28,12 @@ var topics = ["Michael Jordan", "Magic Johnson", "Larry Bird", "Karl Malone"];
 
       $(document).on("click", ".topic", function() {
       var person = $(this).attr("data-name");
+      var state = $(this).attr("data-state");
       var queryURL = "http://api.giphy.com/v1/gifs/search?q=" +
         person + "&api_key=dc6zaTOxFJmzC&limit=10";
+
+      
+  
 
       $.ajax({
           url: queryURL,
@@ -36,7 +42,7 @@ var topics = ["Michael Jordan", "Magic Johnson", "Larry Bird", "Karl Malone"];
         .done(function(response) {
         	console.log(response);
           var results = response.data;
-
+          
           for (var i = 0; i < results.length; i++) {
             var gifDiv = $("<div class='item'>");
 
@@ -45,16 +51,34 @@ var topics = ["Michael Jordan", "Magic Johnson", "Larry Bird", "Karl Malone"];
             var p = $("<p>").text("Rating: " + rating);
 
             var personImage = $("<img>");
+            // personImage.addClass("new");
             personImage.attr("src", results[i].images.fixed_height_still.url);
-            personImage.attr("data-state","still");
-            console.log($(this).attr("data-state"));
+           
+            // console.log($(this).attr("data-state"));
             gifDiv.append(p);
             gifDiv.prepend(personImage);
 
             $("#gifs-appear-here").prepend(gifDiv);
+
+            if (state === 'still'){
+        $(this).attr("src", $(this).attr(results[i].images.fixed_height.url)); 
+        $(this).attr("data-state","animate");
+      }else{
+        $(this).attr("src", $(this).attr(results[i].images.fixed_height_still.url));
+        $(this).attr("data-state", "still");
+      }
+            
           }
+
+
         });
+        // $(document).on("click", ".new", function() {
+  
+      
+ // });
+
     });
+
 
 // METHODS
 // ==========================================================
