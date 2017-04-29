@@ -70,8 +70,10 @@ var topics = ["Michael Jordan", "Magic Johnson", "Larry Bird", "Karl Malone"];
             
             
           }
-         $(document).on("click", ".giphy", function() {
+         // $(document).on("click", ".giphy", function() {
+          $(".giphy").on("click",function(){
             var state = $(this).attr("data-state");
+          
 if (state === 'still'){
         $(this).attr("src", $(this).attr("data-animate")); 
         $(this).attr("data-state","animate");
@@ -103,7 +105,7 @@ if (state === 'still'){
         var topic = $("#topic-input").val().trim();
         // The renderButtons function is called, rendering the list of topic buttons
         topics.push(topic);
-
+        $("#topic-input").val("");
         renderButtons();
       });
       renderButtons();
