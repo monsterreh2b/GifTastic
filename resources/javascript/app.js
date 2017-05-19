@@ -29,7 +29,7 @@ var topics = ["Michael Jordan", "Magic Johnson", "Larry Bird", "Karl Malone"];
       $(document).on("click", ".topic", function() {
       var person = $(this).attr("data-name");
       var state = $(this).attr("data-state");
-      var queryURL = "http://api.giphy.com/v1/gifs/search?q=" +
+      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
         person + "&api_key=dc6zaTOxFJmzC&limit=10";
 
       
